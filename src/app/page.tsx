@@ -10,15 +10,25 @@ import Image from "next/image"
 import Link from "next/link"
 import { NavBar } from "@/components/nav-bar"
 
-// Mock data for doctors - expanded list
-const doctors = [
+// Define doctor type
+interface Doctor {
+  id: number
+  name: string
+  specialization: string
+  rating: number
+  isActive: boolean
+  imageUrl: string
+}
+
+// Mock data for doctors
+const doctors: Doctor[] = [
   {
     id: 1,
     name: "Dr. John Smith",
     specialization: "Cardiologist",
     rating: 4.5,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2281709217/display_1500/stock-vector-male-doctor-smiling-self-confidence-flat-vector-style-characters-healthcare-illustrations-2281709217.jpg",
   },
   {
     id: 2,
@@ -26,7 +36,7 @@ const doctors = [
     specialization: "Dermatologist",
     rating: 4.8,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2481032615/display_1500/stock-vector-male-doctor-smiling-with-happy-face-holding-a-computer-tablet-flat-vector-style-characters-2481032615.jpg",
   },
   {
     id: 3,
@@ -34,7 +44,7 @@ const doctors = [
     specialization: "Orthopedic",
     rating: 4.2,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2574623365/display_1500/stock-vector-doctor-isolate-vector-charecter-illustration-2574623365.jpg",
   },
   {
     id: 4,
@@ -42,7 +52,7 @@ const doctors = [
     specialization: "Pediatrician",
     rating: 4.9,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2281710309/display_1500/stock-vector-female-doctor-smiling-and-writing-on-clip-board-flat-vector-style-characters-healthcare-2281710309.jpg",
   },
   {
     id: 5,
@@ -50,7 +60,7 @@ const doctors = [
     specialization: "Neurologist",
     rating: 4.7,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2281709525/display_1500/stock-vector-friendly-male-doctor-flat-vector-style-characters-healthcare-illustrations-2281709525.jpg",
   },
   {
     id: 6,
@@ -58,7 +68,7 @@ const doctors = [
     specialization: "Gynecologist",
     rating: 4.6,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2609997749/display_1500/stock-vector-nurse-with-stethoscope-and-hand-out-to-side-for-national-nurses-day-2609997749.jpg",
   },
   {
     id: 7,
@@ -66,7 +76,7 @@ const doctors = [
     specialization: "Ophthalmologist",
     rating: 4.4,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2281709301/display_1500/stock-vector-good-male-doctor-pointing-at-somethings-flat-vector-style-characters-healthcare-illustrations-2281709301.jpg",
   },
   {
     id: 8,
@@ -74,7 +84,7 @@ const doctors = [
     specialization: "Psychiatrist",
     rating: 4.8,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2374744065/display_1500/stock-photo--young-woman-nurse-with-a-stethoscope-pointing-at-clipboard-paper-medical-check-up-2374744065.jpg",
   },
   {
     id: 9,
@@ -82,7 +92,7 @@ const doctors = [
     specialization: "Gastroenterologist",
     rating: 4.5,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2441516949/display_1500/stock-vector-doctor-icon-vector-doctor-design-doctor-logo-medical-doctor-logo-eps-2441516949.jpg",
   },
   {
     id: 10,
@@ -90,7 +100,7 @@ const doctors = [
     specialization: "Endocrinologist",
     rating: 4.7,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2430828609/display_1500/stock-vector-young-latina-woman-nurse-using-digital-tablet-flat-vector-illustration-isolated-on-white-background-2430828609.jpg",
   },
   {
     id: 11,
@@ -98,7 +108,7 @@ const doctors = [
     specialization: "Urologist",
     rating: 4.3,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/1782099236/display_1500/stock-vector-professional-doctor-with-stethoscope-and-uniform-man-doctor-hospital-worker-vector-illustration-1782099236.jpg",
   },
   {
     id: 12,
@@ -106,7 +116,7 @@ const doctors = [
     specialization: "Rheumatologist",
     rating: 4.6,
     isActive: false,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2540147315/display_1500/stock-vector-young-woman-medical-worker-standing-and-holding-a-binder-flat-vector-illustration-isolated-on-2540147315.jpg",
   },
   {
     id: 13,
@@ -114,7 +124,7 @@ const doctors = [
     specialization: "Pulmonologist",
     rating: 4.4,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2281709217/display_1500/stock-vector-male-doctor-smiling-self-confidence-flat-vector-style-characters-healthcare-illustrations-2281709217.jpg",
   },
   {
     id: 14,
@@ -122,7 +132,7 @@ const doctors = [
     specialization: "Oncologist",
     rating: 4.9,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2574623365/display_1500/stock-vector-doctor-isolate-vector-charecter-illustration-2574623365.jpg",
   },
   {
     id: 15,
@@ -130,7 +140,7 @@ const doctors = [
     specialization: "Anesthesiologist",
     rating: 4.5,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2481032615/display_1500/stock-vector-male-doctor-smiling-with-happy-face-holding-a-computer-tablet-flat-vector-style-characters-2481032615.jpg",
   },
   {
     id: 16,
@@ -138,7 +148,7 @@ const doctors = [
     specialization: "Radiologist",
     rating: 4.7,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2415890793/display_1500/stock-vector-young-nurse-in-uniform-holding-notebook-and-pen-to-take-notes-health-worker-intern-woman-standing-2415890793.jpg",
   },
   {
     id: 17,
@@ -146,7 +156,7 @@ const doctors = [
     specialization: "Emergency Medicine",
     rating: 4.6,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2281709525/display_1500/stock-vector-friendly-male-doctor-flat-vector-style-characters-healthcare-illustrations-2281709525.jpg",
   },
   {
     id: 18,
@@ -154,7 +164,7 @@ const doctors = [
     specialization: "Plastic Surgeon",
     rating: 4.8,
     isActive: true,
-    imageUrl: "https://placehold.co/200x200",
+    imageUrl: "https://www.shutterstock.com/shutterstock/photos/2280614439/display_1500/stock-vector-black-female-doctor-in-medical-gown-a-family-doctor-is-pointing-to-something-while-holding-a-2280614439.jpg",
   },
 ]
 
@@ -197,13 +207,48 @@ function HeroSection() {
   )
 }
 
-function DoctorCard({ doctor }: { doctor: (typeof doctors)[0] }) {
+function Footer() {
+  return (
+    <footer className="bg-gray-800 text-white py-8">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-lg font-semibold mb-4">About Us</h3>
+            <p className="text-gray-400">
+              Your trusted platform for connecting with certified medical professionals.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              <li><Link href="/about" className="text-gray-400 hover:text-white">About</Link></li>
+              <li><Link href="/contact" className="text-gray-400 hover:text-white">Contact</Link></li>
+              <li><Link href="/privacy" className="text-gray-400 hover:text-white">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-gray-400 hover:text-white">Terms of Service</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+            <p className="text-gray-400">Email: support@example.com</p>
+            <p className="text-gray-400">Phone: (123) 456-7890</p>
+            <p className="text-gray-400">Address: 123 Health Lane, City, Country</p>
+          </div>
+        </div>
+        <div className="mt-8 text-center text-gray-400">
+          © {new Date().getFullYear()} HealthCare Booking Platform. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+function DoctorCard({ doctor }: { doctor: Doctor }) {
   return (
     <Card className="h-full">
       <CardHeader className="text-center">
         <div className="mx-auto mb-4">
           <Image
-            src={doctor.imageUrl || "/placeholder.svg"}
+            src={doctor.imageUrl}
             alt={doctor.name}
             width={200}
             height={200}
@@ -220,7 +265,9 @@ function DoctorCard({ doctor }: { doctor: (typeof doctors)[0] }) {
             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
             <span className="ml-1 text-sm font-medium">{doctor.rating}</span>
           </div>
-          <Badge variant={doctor.isActive ? "default" : "secondary"}>{doctor.isActive ? "Active" : "Not Active"}</Badge>
+          <Badge variant={doctor.isActive ? "default" : "secondary"}>
+            {doctor.isActive ? "Active" : "Not Active"}
+          </Badge>
         </div>
         <Button className="w-full" disabled={!doctor.isActive} asChild={doctor.isActive}>
           {doctor.isActive ? (
@@ -240,15 +287,21 @@ function DoctorCard({ doctor }: { doctor: (typeof doctors)[0] }) {
   )
 }
 
-function DoctorFilters({ onSearch, onFilter }: { onSearch: (value: string) => void, onFilter: (value: string) => void }) {
+function DoctorFilters({
+  onSearch,
+  onFilter,
+}: {
+  onSearch: (value: string) => void
+  onFilter: (value: string) => void
+}) {
   return (
     <div className="flex flex-col md:flex-row gap-4 mb-8">
       <div className="flex-1">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-          <Input 
-            placeholder="Search doctors by name..." 
-            className="pl-10" 
+          <Input
+            placeholder="Search doctors by name..."
+            className="pl-10"
             onChange={(e) => onSearch(e.target.value)}
           />
         </div>
@@ -275,7 +328,7 @@ export default function HomePage() {
 
   const filteredDoctors = doctors.filter((doctor) => {
     const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesSpecialization = 
+    const matchesSpecialization =
       selectedSpecialization === "All" || doctor.specialization === selectedSpecialization
     return matchesSearch && matchesSpecialization
   })
@@ -284,7 +337,6 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       <NavBar />
       <HeroSection />
-
       <main className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Our Doctors</h2>
@@ -292,18 +344,14 @@ export default function HomePage() {
             Choose from our experienced team of medical professionals
           </p>
         </div>
-
-        <DoctorFilters 
-          onSearch={setSearchTerm}
-          onFilter={setSelectedSpecialization}
-        />
-
+        <DoctorFilters onSearch={setSearchTerm} onFilter={setSelectedSpecialization} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDoctors.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} />
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   )
 }
